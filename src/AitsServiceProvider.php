@@ -10,13 +10,13 @@ class AitsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/aits-api.php', 'aits-api'
+            __DIR__.'/../config/aits-api.php', 'aits-api',
         );
 
         // publish config
         $this->publishes([
             __DIR__.'/../config/aits-api.php' => config_path('aits-api.php'),
-        ]);
+        ],'aits-api');
     }
 
     public function register()
