@@ -13,4 +13,4 @@ php artisan vendor:publish --tag=aits-api
 ```
 - Lastly, configure the environment variables.
 
-Please refer to GitHub Wiki page for api documentation.
+Please refer to [GitHub Wiki](https://github.com/uisits/aits-api/wiki) page for api documentation.

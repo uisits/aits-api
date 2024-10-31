@@ -30,8 +30,8 @@ class CourseDetail extends Data
         public ?string $sectionMeetingHours,
         public ?string $sectionMeetingDates,
         public ?string $sectionBuildingDescription,
-        /** @var Collection<int, Instructor> */
-        public Collection $instructor,
+        /** @var InstructorCollection<int, Instructor> */
+        public InstructorCollection $instructor,
         public string $sectionNumber,
         public ?SpecialApproval $specialApproval,
         public ?SectionPartOfTerm $sectionPartOfTerm,
