@@ -28,4 +28,12 @@ return [
         'username' => env('AITS_PROXY_USERNAME', null),
         'password' => env('AITS_PROXY_PASSWORD', null),
     ],
+
+    /**
+     * Configuration for AITS azure api's
+     */
+    'azure' => [
+        'portal_key' => env('AITS_AZURE_PORTAL_KEY', null),
+        'base_url' => env('AITS_AZURE_BASE_URL', null),
+    ],
 ];

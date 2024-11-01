@@ -25,8 +25,8 @@ class CourseDetail extends Data
         public ?int $crossListSectionMaxEnrollment,
         public ?int $crossListSectionEnrollment,
         public ?int $crossListSectionAvailableSeats,
-        public string $sectionRoomNumber,
-        public string $sectionMeetingDays,
+        public ?string $sectionRoomNumber,
+        public ?string $sectionMeetingDays,
         public ?string $sectionMeetingHours,
         public ?string $sectionMeetingDates,
         public ?string $sectionBuildingDescription,
@@ -39,5 +39,8 @@ class CourseDetail extends Data
         public ?SectionMeetingScheduleType $sectionMeetingScheduleType,
         public ?SectionSession $sectionSession,
         public ?SectionBuilding $sectionBuilding,
+        public ?int $sectionWaitAvail,
+        public ?int $sectionWaitCapacity,
+        public ?int $sectionWaitCount,
     ) {}
 }

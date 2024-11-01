@@ -40,8 +40,34 @@ class AitsServiceProvider extends ServiceProvider
                 });
         });
 
+        /**
+         * Http macro for AITS-Person web services
+         */
         Http::macro('aitsPerson', function () {
             return Http::baseUrl(config('aits-api.person_base_url'))
+                ->when(config('aits-api.with_proxy'), function ($request) {
+                    $request->withOptions([
+                        'proxy' => str(config('aits-api.proxy.scheme'))
+                            ->append(config('aits-api.proxy.username'))
+                            ->append(':')
+                            ->append(config('aits-api.proxy.password'))
+                            ->append('@')
+                            ->append(config('aits-api.proxy.host'))
+                            ->append(':')
+                            ->append(config('aits-api.proxy.port')),
+                    ]);
+                });
+        });
+
+        /**
+         * Http macro for AITS Azure apis
+         */
+        Http::macro('aitsAzure', function () {
+            return Http::baseUrl(config('aits-api.azure.base_url'))
+                ->withHeaders([
+                    'Cache-Control' => 'no-cache',
+                    'Ocp-Apim-Subscription-Key' => config('aits-api.azure.portal_key')
+                ])
                 ->when(config('aits-api.with_proxy'), function ($request) {
                     $request->withOptions([
                         'proxy' => str(config('aits-api.proxy.scheme'))
