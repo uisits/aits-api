@@ -14,6 +14,11 @@ return [
     'base_url' => env('AITS_BASE_URL', null),
 
     /**
+     * BASE URL for AITS Person endpoint
+     */
+    'person_base_url' => env('AITS_PERSON_BASE_URL', null),
+
+    /**
      * Proxy Server configuration.
      */
     'proxy' => [

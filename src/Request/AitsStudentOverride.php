@@ -20,7 +20,7 @@ class AitsStudentOverride
                 ->get('/StudentRegistrationOverrides/1_0/'.$uin.'/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Detail request failed!');
+                throw new \Exception('Student Override request failed!');
             }
 
             if ($response->collect('list')->isEmpty()) {
@@ -29,7 +29,7 @@ class AitsStudentOverride
 
             return StudentOverride::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Course Detail request failed!');
+            throw new \Exception('Student Override request failed!');
         }
     }
 

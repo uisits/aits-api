@@ -1,10 +1,10 @@
 <?php
 
-namespace Uisits\AitsApi\Response\BasicLearner;
+namespace Uisits\AitsApi\Response\StudentAttribute;
 
 use Spatie\LaravelData\Data;
 
-class Department extends Data
+class AttributeDetail extends Data
 {
     public function __construct(
         public string $code,

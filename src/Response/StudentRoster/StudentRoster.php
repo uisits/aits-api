@@ -4,6 +4,9 @@ namespace Uisits\AitsApi\Response\StudentRoster;
 
 use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\LightWeightPerson;
+use Uisits\AitsApi\Response\ValidCourseRegistrationLevel;
+use Uisits\AitsApi\Response\ValidRegistrationStatus;
+use Uisits\AitsApi\Response\ValidTerm;
 
 class StudentRoster extends Data
 {

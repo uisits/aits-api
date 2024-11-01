@@ -1,10 +1,10 @@
 <?php
 
-namespace Uisits\AitsApi\Response\StudentRoster;
+namespace Uisits\AitsApi\Response;
 
 use Spatie\LaravelData\Data;
 
-class ValidTerm extends Data
+class Department extends Data
 {
     public function __construct(
         public string $code,

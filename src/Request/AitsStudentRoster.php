@@ -19,12 +19,12 @@ class AitsStudentRoster
                 ->get('/StudentRoster/1_0/'.$term.'/'.$crn);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Detail request failed!');
+                throw new \Exception('Student Roster request failed!');
             }
 
             return StudentRoster::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Course Detail request failed!'.$exception->getMessage());
+            throw new \Exception('Student Roster request failed!'.$exception->getMessage());
         }
     }
 }

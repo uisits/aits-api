@@ -2,8 +2,8 @@
 
 namespace Uisits\AitsApi\Response\CourseDetail;
 
-use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Response\ScheduleType;
 use Uisits\AitsApi\Response\Subject;
 
 class CourseDetail extends Data

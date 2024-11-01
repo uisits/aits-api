@@ -1,10 +1,10 @@
 <?php
 
-namespace Uisits\AitsApi\Response\BasicLearner;
+namespace Uisits\AitsApi\Response;
 
 use Spatie\LaravelData\Data;
 
-class Campus extends Data
+class ValidCourseRegistrationLevel extends Data
 {
     public function __construct(
         public string $code,

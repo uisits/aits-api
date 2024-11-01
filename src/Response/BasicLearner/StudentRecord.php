@@ -3,6 +3,9 @@
 namespace Uisits\AitsApi\Response\BasicLearner;
 
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Response\Campus;
+use Uisits\AitsApi\Response\College;
+use Uisits\AitsApi\Response\Department;
 
 class StudentRecord extends Data
 {
