@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
@@ -13,7 +15,7 @@ class AitsStudentHold
      *
      * @throws \Exception
      */
-    public static function get(string $uin)
+    public static function get(string $uin): \Spatie\LaravelData\Data
     {
         try {
             $response = Http::aits()
@@ -29,7 +31,7 @@ class AitsStudentHold
 
             return StudentHold::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student Holds request failed! '.$exception);
+            throw new \Exception('Student Holds request failed! '.$exception, $exception->getCode(), $exception);
         }
     }
 
@@ -48,7 +50,7 @@ class AitsStudentHold
 
             return StudentHold::collection($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Student Hold put request failed! '.$exception);
+            throw new \Exception('Student Hold put request failed! '.$exception, $exception->getCode(), $exception);
         }
     }
 }

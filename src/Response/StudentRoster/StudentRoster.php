@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Response\StudentRoster;
 
 use Spatie\LaravelData\Data;

@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
 use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
-use Uisits\AitsApi\Response\RaceEthnicity\RaceEthnicity;
 
 class AitsAzureStudentHighSchoolGpa
 {
@@ -17,10 +18,10 @@ class AitsAzureStudentHighSchoolGpa
     {
         try {
             $response = Http::aitsAzure()
-                ->get('/person/high-school-query/high-school-query/' . $uin);
+                ->get('/person/high-school-query/high-school-query/'.$uin);
 
-            if (!$response->successful()) {
-                throw new \Exception('Student HighSchool Gpa request failed! ' . $response);
+            if (! $response->successful()) {
+                throw new \Exception('Student HighSchool Gpa request failed! '.$response);
             }
 
             if ($response->collect('list')->isEmpty()) {
@@ -28,9 +29,10 @@ class AitsAzureStudentHighSchoolGpa
             }
 
             dd($response->collect('list')->first());
+
             return AzureStudentGpa::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student HighSchool Gpa request failed! ' . $exception->getMessage());
+            throw new \Exception('Student HighSchool Gpa request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

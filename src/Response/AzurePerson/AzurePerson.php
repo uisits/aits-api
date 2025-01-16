@@ -1,18 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Response\AzurePerson;
 
-use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
 
 class AzurePerson extends Data
 {
-
     public function __construct(
         public Identity $identity,
         /** @var NameCollection<int, Name> */
         public NameCollection $names,
-        public Bio $biodemo,
+        public Bio $bio,
         /** @var AddressCollection<int, Address> */
         public AddressCollection $address,
         /** @var EmailCollection<int, Email> */

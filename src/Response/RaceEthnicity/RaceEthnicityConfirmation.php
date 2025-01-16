@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Response\RaceEthnicity;
 
-use Carbon\CarbonImmutable;
-use DateTime;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;

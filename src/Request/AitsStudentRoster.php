@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
@@ -24,7 +26,7 @@ class AitsStudentRoster
 
             return StudentRoster::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Student Roster request failed!'.$exception->getMessage());
+            throw new \Exception('Student Roster request failed!'.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

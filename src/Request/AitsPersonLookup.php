@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
@@ -8,11 +10,9 @@ use Uisits\AitsApi\Response\Person\Person;
 class AitsPersonLookup
 {
     /**
-     * @return null
-     *
      * @throws \Exception
      */
-    public static function get(string $uin)
+    public static function get(string $uin): \Spatie\LaravelData\Data
     {
         try {
             $response = Http::aitsPerson()
@@ -29,7 +29,7 @@ class AitsPersonLookup
             return Person::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             dd($exception->getMessage());
-            throw new \Exception('Person Lookup request failed! '.$exception->getMessage());
+            throw new \Exception('Person Lookup request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Response\Person;
 
 use Illuminate\Support\Collection;
@@ -13,7 +15,7 @@ class Person extends Data
         public string $uin,
         public ?Name $name,
         /** @var Collection<int, Netid> */
-        public ?Collection $netIds,
+        public ?Collection $collection,
         public ?Address $address,
         public ?Phone $phone,
         public ?string $title,

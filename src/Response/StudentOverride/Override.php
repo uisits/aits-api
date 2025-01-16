@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Response\StudentOverride;
 
 use Spatie\LaravelData\Data;
@@ -11,7 +13,7 @@ class Override extends Data
         public string $guid,
         public string $pidm,
         public string $termCode,
-        public ?OverrideRule $rule,
+        public ?OverrideRule $overrideRule,
         public ?Subject $subject,
         public string $courseNum,
         public string $sequenceNum,
