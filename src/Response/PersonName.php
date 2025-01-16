@@ -6,10 +6,11 @@ namespace Uisits\AitsApi\Response;
 
 use Spatie\LaravelData\Data;
 
-class LightWeightPerson extends Data
+class PersonName extends Data
 {
     public function __construct(
-        public PersonName $name,
-        public string $institutionalId,
+        public string $lastName,
+        public ?string $firstName,
+        public ?string $type,
     ) {}
 }

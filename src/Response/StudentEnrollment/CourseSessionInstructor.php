@@ -28,8 +28,8 @@ class CourseSessionInstructor extends Data
         public string $emailAddress,
     ) {
         $this->netid = Str::of($this->emailAddress)->before('@')->value();
-        $this->first_name = $this->lightweightPerson?->name['firstName'];
-        $this->last_name = $this->lightweightPerson?->name['lastName'];
+        $this->first_name = $this->lightweightPerson?->name?->firstName;
+        $this->last_name = $this->lightweightPerson?->name?->lastName;
         $this->uin = $this->lightweightPerson?->institutionalId;
     }
 }
