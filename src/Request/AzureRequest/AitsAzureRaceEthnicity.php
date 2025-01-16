@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
@@ -12,7 +14,7 @@ class AitsAzureRaceEthnicity
      *
      * @throws \Exception
      */
-    public static function get(string $uin)
+    public static function get(string $uin): \Spatie\LaravelData\Data
     {
         try {
             $response = Http::aitsAzure()
@@ -28,7 +30,7 @@ class AitsAzureRaceEthnicity
 
             return RaceEthnicity::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Race Ethnicity request failed! '.$exception->getMessage());
+            throw new \Exception('Race Ethnicity request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

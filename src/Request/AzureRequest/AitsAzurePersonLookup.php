@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
 use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
-use Uisits\AitsApi\Response\RaceEthnicity\RaceEthnicity;
 
 class AitsAzurePersonLookup
 {
@@ -29,7 +30,7 @@ class AitsAzurePersonLookup
 
             return AzureStudentGpa::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Person request failed! '.$exception->getMessage());
+            throw new \Exception('Person request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

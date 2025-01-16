@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
@@ -13,7 +15,7 @@ class AitsStudentAdvisor
      *
      * @throws \Exception
      */
-    public static function get(string $uin, string $term)
+    public static function get(string $uin, string $term): \Spatie\LaravelData\Data
     {
         try {
             $response = Http::aits()
@@ -30,7 +32,7 @@ class AitsStudentAdvisor
             return StudentAdvisor::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             dd($exception->getMessage());
-            throw new \Exception('Student Advisor request failed!');
+            throw new \Exception('Student Advisor request failed!', $exception->getCode(), $exception);
         }
     }
 }

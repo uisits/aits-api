@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Response\AzurePerson;
 
-use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
 
 class Address extends Data
 {
-
     public function __construct(
         public string $guid,
         public string $pidm,
@@ -15,7 +15,7 @@ class Address extends Data
         public ?string $toDate,
         public ?string $activityDate,
         public ?string $statusInd,
-        public AddressType $type,
+        public AddressType $addressType,
         public ?string $sequenceNum,
         public ?string $streetLine1,
         public ?string $streetLine2,
@@ -27,6 +27,6 @@ class Address extends Data
         public ?Nation $nation,
         public ?string $effectiveStatus,
         /** @var PhoneCollection<int, Phone> */
-        public ?PhoneCollection $phone,
+        public ?PhoneCollection $phoneCollection,
     ) {}
 }

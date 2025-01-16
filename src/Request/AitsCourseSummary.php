@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
@@ -12,7 +14,7 @@ class AitsCourseSummary
      *
      * @throws \Exception
      */
-    public static function get(string $term)
+    public static function get(string $term): \Spatie\LaravelData\DataCollection|\Spatie\LaravelData\PaginatedDataCollection|\Spatie\LaravelData\CursorPaginatedDataCollection|\Illuminate\Support\Enumerable|\Illuminate\Pagination\AbstractPaginator|\Illuminate\Contracts\Pagination\Paginator|\Illuminate\Pagination\AbstractCursorPaginator|\Illuminate\Contracts\Pagination\CursorPaginator|array
     {
         try {
             $response = Http::aits()
@@ -28,7 +30,7 @@ class AitsCourseSummary
 
             return CourseSummary::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Course Summary request failed! '.$exception->getMessage());
+            throw new \Exception('Course Summary request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

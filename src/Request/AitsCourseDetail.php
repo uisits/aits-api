@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
@@ -12,7 +14,7 @@ class AitsCourseDetail
      *
      * @throws \Exception
      */
-    public static function get(string $term, string $crn)
+    public static function get(string $term, string $crn): \Spatie\LaravelData\Data
     {
         try {
             $response = Http::aits()
@@ -28,7 +30,7 @@ class AitsCourseDetail
 
             return CourseDetail::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Course Detail request failed! '.$exception->getMessage());
+            throw new \Exception('Course Detail request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }
