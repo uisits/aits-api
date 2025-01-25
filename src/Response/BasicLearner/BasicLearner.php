@@ -16,4 +16,11 @@ class BasicLearner extends Data
         public StudentRecord $studentRecord,
         public StudentClass $studentClass,
     ) {}
+
+    public function with(): array
+    {
+        return [
+            'test' => 'Prasad Chinwal'
+        ];
+    }
 }

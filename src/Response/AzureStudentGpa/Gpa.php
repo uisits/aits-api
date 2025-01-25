@@ -13,7 +13,7 @@ class Gpa extends Data
     public function __construct(
         public string $guid,
         public string $pidm,
-        public ?ValidTerm $validTerm,
+        public ?ValidTerm $term,
         public ?Level $level,
         public ?string $typeInd,
         public ?float $hoursAttempted,

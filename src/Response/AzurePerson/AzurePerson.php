@@ -12,7 +12,7 @@ class AzurePerson extends Data
         public Identity $identity,
         /** @var NameCollection<int, Name> */
         public NameCollection $names,
-        public Bio $bio,
+        public Bio $biodemo,
         /** @var AddressCollection<int, Address> */
         public AddressCollection $address,
         /** @var EmailCollection<int, Email> */

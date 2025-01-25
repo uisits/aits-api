@@ -15,7 +15,7 @@ class Address extends Data
         public ?string $toDate,
         public ?string $activityDate,
         public ?string $statusInd,
-        public AddressType $addressType,
+        public AddressType $type,
         public ?string $sequenceNum,
         public ?string $streetLine1,
         public ?string $streetLine2,
@@ -27,6 +27,6 @@ class Address extends Data
         public ?Nation $nation,
         public ?string $effectiveStatus,
         /** @var PhoneCollection<int, Phone> */
-        public ?PhoneCollection $phoneCollection,
+        public ?PhoneCollection $phone,
     ) {}
 }

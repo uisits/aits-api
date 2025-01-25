@@ -12,7 +12,7 @@ class Phone extends Data
         public string $guid,
         public string $pidm,
         public string $sequenceNum,
-        public ?PhoneType $phoneType,
+        public ?PhoneType $type,
         public ?string $activityDate,
         public ?LinkedAddressType $linkedAddressType,
         public ?string $linkedAddressSequence,

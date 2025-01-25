@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\BasicLearner\BasicLearner;
 
 class AitsBasicLearner
 {
     /**
-     * @return BasicLearner
+     * @param string $uin
+     * @param string $term
+     * @return \Spatie\LaravelData\Data
      *
      * @throws \Exception
      */
