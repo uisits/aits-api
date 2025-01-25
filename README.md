@@ -16,7 +16,7 @@ This package is a collection of AITS api's. It provides and easy way to integrat
   }
 ]
 ```
-- Next run `composer require uisits/aits-api:"^1.0""`
+- Next run `composer require uisits/aits-api`
 
 > To get the latest version of the application please visit [https://github.com/uisits/aits-api/releases](https://github.com/uisits/aits-api/releases) and check the latest release compatible with your application version. 
 
