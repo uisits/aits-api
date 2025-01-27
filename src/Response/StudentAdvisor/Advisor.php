@@ -4,18 +4,23 @@ declare(strict_types=1);
 
 namespace Uisits\AitsApi\Response\StudentAdvisor;
 
+use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\Person;
 
 class Advisor extends Data
 {
-    public ?string $firstName = null;
+    #[Computed]
+    public ?string $firstName;
 
-    public ?string $lastName = null;
+    #[Computed]
+    public ?string $lastName;
 
-    public ?string $uin = null;
+    #[Computed]
+    public ?string $uin;
 
-    public ?string $pidm = null;
+    #[Computed]
+    public ?string $pidm;
 
     public function __construct(
         public Person $person,
