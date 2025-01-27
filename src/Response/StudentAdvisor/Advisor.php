@@ -17,6 +17,9 @@ class Advisor extends Data
     public ?string $lastName;
 
     #[Computed]
+    public ?string $fullName;
+
+    #[Computed]
     public ?string $uin;
 
     #[Computed]
@@ -30,6 +33,7 @@ class Advisor extends Data
     ) {
         $this->firstName = $this->person?->firstName;
         $this->lastName = $this->person?->lastName;
+        $this->fullName = $this->person?->lastName . ' ' . $this->person?->firstName;
         $this->uin = $this->person?->uin;
         $this->pidm = $this->person?->pidm;
     }
