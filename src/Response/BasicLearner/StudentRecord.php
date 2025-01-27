@@ -64,11 +64,4 @@ class StudentRecord extends Data
         $this->catalogTerms = collect([])->push($this->catalogTerm1)->push($this->catalogTerm2)->filter();
         $this->degrees = collect([])->push($this->degree1)->push($this->degree2)->filter();
     }
-
-    public function with(): array
-    {
-        return [
-            'test' => 'Prasad Chinwal',
-        ];
-    }
 }
