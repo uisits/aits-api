@@ -22,6 +22,8 @@ class StudentRecord extends Data
     public Collection $catalogTerms;
     public Collection $degrees;
 
+    public Collection $levels;
+
     public function __construct(
         public string $guid,
         public string $pidm,
@@ -63,5 +65,6 @@ class StudentRecord extends Data
         $this->programs = collect([])->push($this->program1)->push($this->program2)->filter();
         $this->catalogTerms = collect([])->push($this->catalogTerm1)->push($this->catalogTerm2)->filter();
         $this->degrees = collect([])->push($this->degree1)->push($this->degree2)->filter();
+        $this->levels = collect([])->push($this->level1)->push($this->level2)->filter();
     }
 }
