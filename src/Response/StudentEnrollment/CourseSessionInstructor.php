@@ -21,6 +21,9 @@ class CourseSessionInstructor extends Data
     public ?string $last_name = null;
 
     #[Computed]
+    public ?string $full_name = null;
+
+    #[Computed]
     public ?string $uin = null;
 
     public function __construct(
@@ -28,6 +31,7 @@ class CourseSessionInstructor extends Data
         public string $emailAddress,
     ) {
         $this->netid = Str::of($this->emailAddress)->before('@')->value();
+        $this->full_name = $this->lightweightPerson?->name?->firstName .' ' . $this->lightweightPerson?->name?->lastName;
         $this->first_name = $this->lightweightPerson?->name?->firstName;
         $this->last_name = $this->lightweightPerson?->name?->lastName;
         $this->uin = $this->lightweightPerson?->institutionalId;
