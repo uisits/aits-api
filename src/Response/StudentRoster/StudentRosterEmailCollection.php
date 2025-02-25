@@ -9,8 +9,9 @@ use Illuminate\Support\Str;
 
 class StudentRosterEmailCollection extends Collection
 {
-    public function uisEmail(): StudentRosterEmailCollection
+    public function uisEmail(): ?StudentRosterEmail
     {
-        return $this->filter(fn ($email) => Str::contains($email->emailAddress, 'uis'));
+        return $this->filter(fn ($email) => Str::contains($email->emailAddress, 'uis'))
+            ->first();
     }
 }
