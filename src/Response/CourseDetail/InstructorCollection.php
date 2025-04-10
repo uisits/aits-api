@@ -8,8 +8,9 @@ use Illuminate\Support\Collection;
 
 class InstructorCollection extends Collection
 {
-    public function primaryInstructor(): Instructor
+    public function primaryInstructor(): ?Instructor
     {
-        return $this->where('primaryInd', 'Y')->first();
+        return $this->where('primaryInd', 'Y')
+            ->first();
     }
 }

@@ -7,30 +7,30 @@ namespace Uisits\AitsApi\Request\AzureRequest;
 use Illuminate\Support\Facades\Http;
 use Uisits\AitsApi\Response\AzureBasicEmployee\AzureEmployee;
 
-class AitsAzureStudentGpa
+class AitsAzureBasicEmployee
 {
     /**
      * @return AzureEmployee
      *
      * @throws \Exception
      */
-    public static function get(string $uin, string $termCode, string $level): \Spatie\LaravelData\Data
+    public static function get(string $uin): \Spatie\LaravelData\Data
     {
         try {
             $response = Http::aitsAzure()
-                ->get('/student/student-gpas-query/student-gpas-query/'.$uin.'/'.$termCode.'/'.$level);
+                ->get('/employee/basic-employee-query/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('StudentGpa request failed! '.$response);
+                throw new \Exception('Employee Query failed! '.$response);
             }
 
             if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('StudentGpa not found!');
+                throw new \Exception('Employee not found!');
             }
 
             return AzureEmployee::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('StudentGpa request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new \Exception('Employee Query failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }
