@@ -14,7 +14,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/serialization" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/socket" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/sync" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/windows-registry" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/daverandom/libdns" />
