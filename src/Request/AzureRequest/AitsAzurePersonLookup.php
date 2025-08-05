@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
-use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
+use Uisits\AitsApi\Response\AzurePerson\AzurePerson;
 
 class AitsAzurePersonLookup
 {
     /**
-     * @return AzureStudentGpa
+     * @return AzurePerson
      *
      * @throws \Exception
      */
@@ -28,7 +28,7 @@ class AitsAzurePersonLookup
                 throw new \Exception('Person not found!');
             }
 
-            return AzureStudentGpa::from($response->collect('list')->first());
+            return AzurePerson::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             throw new \Exception('Person request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }

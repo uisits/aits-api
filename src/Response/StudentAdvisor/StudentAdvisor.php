@@ -14,6 +14,6 @@ class StudentAdvisor extends Data
         public string $queryTermCode,
         public Person $person,
         /** @var AdvisorCollection<int, Advisor> */
-        public AdvisorCollection $advisors,
+        public ?AdvisorCollection $advisors,
     ) {}
 }

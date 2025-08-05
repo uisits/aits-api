@@ -28,7 +28,7 @@ class Advisor extends Data
     public function __construct(
         public Person $person,
         public ?AdvisorTerm $advisorTerm,
-        public string $primaryAdvisorInd,
+        public ?string $primaryAdvisorInd,
         public ?AdvisorType $advisorType,
     ) {
         $this->firstName = $this->person?->firstName;
