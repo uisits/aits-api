@@ -8,5 +8,8 @@ use Illuminate\Support\Collection;
 
 class EmailCollection extends Collection
 {
-    //
+    public function prefferedEmail(): Email
+    {
+        return $this->filter(fn (Email $email) => $email->preferredInd === 'Y')->first() ?? new Email();
+    }
 }
