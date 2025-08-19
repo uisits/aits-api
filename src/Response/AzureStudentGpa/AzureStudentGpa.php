@@ -17,5 +17,6 @@ class AzureStudentGpa extends Data
         public ?Gpa $termInstitutionalGpa,
         public ?Gpa $levelInstitutionalGpa,
         public ?Gpa $levelOverallGpa,
+        public ?Gpa $levelTransferGpa,
     ) {}
 }

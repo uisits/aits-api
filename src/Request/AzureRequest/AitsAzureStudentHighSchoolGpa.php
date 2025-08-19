@@ -19,7 +19,7 @@ class AitsAzureStudentHighSchoolGpa
     {
         try {
             $response = Http::aitsAzure()
-                ->get('/person/high-school-query/high-school-query/'.$uin);
+                ->get('/person/high-school-query/'.$uin);
 
             if (! $response->successful()) {
                 throw new \Exception('Student HighSchool Gpa request failed! '.$response);
