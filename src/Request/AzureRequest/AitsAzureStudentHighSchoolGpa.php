@@ -6,11 +6,12 @@ namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
 use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
+use Uisits\AitsApi\Response\AzureStudentHsGpa\AzureStudentHsGpa;
 
 class AitsAzureStudentHighSchoolGpa
 {
     /**
-     * @return AzureStudentGpa
+     * @return AzureStudentHsGpa
      *
      * @throws \Exception
      */
@@ -28,9 +29,7 @@ class AitsAzureStudentHighSchoolGpa
                 throw new \Exception('Student HighSchool Gpa not found!');
             }
 
-            dd($response->collect('list')->first());
-
-            return AzureStudentGpa::from($response->collect('list')->first());
+            return AzureStudentHsGpa::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             throw new \Exception('Student HighSchool Gpa request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }

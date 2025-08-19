@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 class AdvisorCollection extends Collection
 {
-    public function primaryAdvisor(): Advisor
+    public function primaryAdvisor(): Advisor|null
     {
         return $this->where('primaryAdvisorInd', 'Y')->first();
     }

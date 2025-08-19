@@ -18,6 +18,7 @@ class Bio extends Data
         public ?string $citzCode,
         public ?string $maritalStatus,
         public ?string $gender,
+        public ?string $confidentialInd,
         public ?GenderIdentity $genderIdentity,
         public ?PersonalPronoun $personalPronoun,
         public ?string $armedForcesServiceMedal,
