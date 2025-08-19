@@ -15,7 +15,7 @@ class StudentAttribute extends Data
         public string $queryCampusCode,
         public string $queryTermCode,
         public Person $person,
-        /** @var Collection<int, Attribute> */
-        public ?Collection $attribute,
+        /** @var AttributeCollection<int, AttributeItem> */
+        public ?AttributeCollection $attribute,
     ) {}
 }
