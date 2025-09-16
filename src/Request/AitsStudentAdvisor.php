@@ -31,7 +31,6 @@ class AitsStudentAdvisor
 
             return StudentAdvisor::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             throw new \Exception('Student Advisor request failed!', $exception->getCode(), $exception);
         }
     }
