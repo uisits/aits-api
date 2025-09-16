@@ -28,7 +28,6 @@ class AitsPersonLookup
 
             return Person::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             throw new \Exception('Person Lookup request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
