@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Response\AzureBasicEmployee;
 
 use Spatie\LaravelData\Data;
-use Uisits\AitsApi\Response\AzureStudentGpa\Gpa;
 use Uisits\AitsApi\Response\Campus;
-use Uisits\AitsApi\Response\Person;
 
 class AzureEmployee extends Data
 {

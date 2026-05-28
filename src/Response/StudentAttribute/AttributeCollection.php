@@ -6,7 +6,4 @@ namespace Uisits\AitsApi\Response\StudentAttribute;
 
 use Illuminate\Support\Collection;
 
-class AttributeCollection extends Collection
-{
-
-}
+class AttributeCollection extends Collection {}

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\RaceEthnicity\RaceEthnicity;
 
 class AitsAzureRaceEthnicity
@@ -14,7 +15,7 @@ class AitsAzureRaceEthnicity
      *
      * @throws \Exception
      */
-    public static function get(string $uin): \Spatie\LaravelData\Data
+    public static function get(string $uin): Data
     {
         try {
             $response = Http::aitsAzure()

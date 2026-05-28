@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
-use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
 use Uisits\AitsApi\Response\AzureStudentHsGpa\AzureStudentHsGpa;
 
 class AitsAzureStudentHighSchoolGpa

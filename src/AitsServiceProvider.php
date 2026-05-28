@@ -28,18 +28,7 @@ class AitsServiceProvider extends ServiceProvider
          */
         Http::macro('aits', function () {
             return Http::baseUrl(config('aits-api.base_url'))
-                ->when(config('aits-api.with_proxy'), function ($request): void {
-                    $request->withOptions([
-                        'proxy' => str(config('aits-api.proxy.scheme'))
-                            ->append(config('aits-api.proxy.username'))
-                            ->append(':')
-                            ->append(config('aits-api.proxy.password'))
-                            ->append('@')
-                            ->append(config('aits-api.proxy.host'))
-                            ->append(':')
-                            ->append(config('aits-api.proxy.port')),
-                    ]);
-                });
+                ->when(config('aits-api.with_proxy'), fn ($request) => $this->withProxy($request));
         });
 
         /**
@@ -47,18 +36,7 @@ class AitsServiceProvider extends ServiceProvider
          */
         Http::macro('aitsPerson', function () {
             return Http::baseUrl(config('aits-api.person_base_url'))
-                ->when(config('aits-api.with_proxy'), function ($request): void {
-                    $request->withOptions([
-                        'proxy' => str(config('aits-api.proxy.scheme'))
-                            ->append(config('aits-api.proxy.username'))
-                            ->append(':')
-                            ->append(config('aits-api.proxy.password'))
-                            ->append('@')
-                            ->append(config('aits-api.proxy.host'))
-                            ->append(':')
-                            ->append(config('aits-api.proxy.port')),
-                    ]);
-                });
+                ->when(config('aits-api.with_proxy'), fn ($request) => $this->withProxy($request));
         });
 
         /**
@@ -70,18 +48,38 @@ class AitsServiceProvider extends ServiceProvider
                     'Cache-Control' => 'no-cache',
                     'Ocp-Apim-Subscription-Key' => config('aits-api.azure.portal_key'),
                 ])
-                ->when(config('aits-api.with_proxy'), function ($request): void {
-                    $request->withOptions([
-                        'proxy' => str(config('aits-api.proxy.scheme'))
-                            ->append(config('aits-api.proxy.username'))
-                            ->append(':')
-                            ->append(config('aits-api.proxy.password'))
-                            ->append('@')
-                            ->append(config('aits-api.proxy.host'))
-                            ->append(':')
-                            ->append(config('aits-api.proxy.port')),
-                    ]);
-                });
+                ->when(config('aits-api.with_proxy'), fn ($request) => $this->withProxy($request));
         });
+    }
+
+    private function withProxy($request): void
+    {
+        $proxy = $this->proxyUrl();
+
+        if ($proxy === null) {
+            return;
+        }
+
+        $request->withOptions([
+            'proxy' => $proxy,
+        ]);
+    }
+
+    private function proxyUrl(): ?string
+    {
+        $host = config('aits-api.proxy.host');
+        $port = config('aits-api.proxy.port');
+
+        if (blank($host) || blank($port)) {
+            return null;
+        }
+
+        $username = config('aits-api.proxy.username');
+        $password = config('aits-api.proxy.password');
+        $credentials = filled($username)
+            ? $username.(filled($password) ? ':'.$password : '').'@'
+            : '';
+
+        return config('aits-api.proxy.scheme').$credentials.$host.':'.$port;
     }
 }

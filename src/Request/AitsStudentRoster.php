@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Uisits\AitsApi\Request;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Uisits\AitsApi\Response\StudentRoster\StudentRoster;
 
 class AitsStudentRoster
 {
     /**
-     * @return array|\Illuminate\Contracts\Pagination\CursorPaginator|\Illuminate\Contracts\Pagination\Paginator|\Illuminate\Pagination\AbstractCursorPaginator|\Illuminate\Pagination\AbstractPaginator|\Illuminate\Support\Collection|\Illuminate\Support\Enumerable|\Illuminate\Support\LazyCollection|\Spatie\LaravelData\CursorPaginatedDataCollection|\Spatie\LaravelData\DataCollection|\Spatie\LaravelData\PaginatedDataCollection
-     *
      * @throws \Exception
      */
-    public static function get(string $term, string $crn): \Illuminate\Support\Collection
+    public static function get(string $term, string $crn): Collection
     {
         try {
             $response = Http::aits()

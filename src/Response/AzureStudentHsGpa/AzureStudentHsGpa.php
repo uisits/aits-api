@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Response\AzureStudentHsGpa;
 
 use Spatie\LaravelData\Data;
-use Uisits\AitsApi\Response\AzureStudentGpa\Gpa;
 
 class AzureStudentHsGpa extends Data
 {

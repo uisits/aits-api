@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Response\BasicLearner;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\Campus;
 use Uisits\AitsApi\Response\College;
@@ -14,12 +13,19 @@ use Uisits\AitsApi\Response\Department;
 class StudentRecord extends Data
 {
     public Collection $colleges;
+
     public Collection $departments;
+
     public Collection $majors;
+
     public Collection $minors;
+
     public Collection $concentrations;
+
     public Collection $programs;
+
     public Collection $catalogTerms;
+
     public Collection $degrees;
 
     public Collection $levels;

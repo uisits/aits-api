@@ -9,7 +9,6 @@ use Spatie\LaravelData\Data;
 
 class PersonName extends Data
 {
-
     #[Computed]
     public ?string $fullName;
 
@@ -18,6 +17,6 @@ class PersonName extends Data
         public ?string $firstName,
         public ?string $type,
     ) {
-        $this->fullName = $this->firstName . ' ' . $this->lastName;
+        $this->fullName = $this->firstName.' '.$this->lastName;
     }
 }

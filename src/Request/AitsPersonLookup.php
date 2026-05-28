@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\Person\Person;
 
 class AitsPersonLookup
@@ -12,7 +13,7 @@ class AitsPersonLookup
     /**
      * @throws \Exception
      */
-    public static function get(string $uin): \Spatie\LaravelData\Data
+    public static function get(string $uin): Data
     {
         try {
             $response = Http::aitsPerson()

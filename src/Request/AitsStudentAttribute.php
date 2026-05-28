@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\StudentAttribute\StudentAttribute;
 
 class AitsStudentAttribute
@@ -14,7 +15,7 @@ class AitsStudentAttribute
      *
      * @throws \Exception
      */
-    public static function get(string $uin, string $term): \Spatie\LaravelData\Data
+    public static function get(string $uin, string $term): Data
     {
         try {
             $response = Http::aits()

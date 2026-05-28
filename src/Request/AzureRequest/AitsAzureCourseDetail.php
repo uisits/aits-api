@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\CourseDetail\CourseDetail;
 
 class AitsAzureCourseDetail
@@ -14,7 +15,7 @@ class AitsAzureCourseDetail
      *
      * @throws \Exception
      */
-    public static function get(string $term, string $crn): \Spatie\LaravelData\Data
+    public static function get(string $term, string $crn): Data
     {
         try {
             $response = Http::aitsAzure()

@@ -6,6 +6,7 @@ namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ItemNotFoundException;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\StudentAdvisor\StudentAdvisor;
 
 class AitsStudentAdvisor
@@ -15,7 +16,7 @@ class AitsStudentAdvisor
      *
      * @throws \Exception
      */
-    public static function get(string $uin, string $term): \Spatie\LaravelData\Data
+    public static function get(string $uin, string $term): Data
     {
         try {
             $response = Http::aits()

@@ -11,13 +11,9 @@ use Uisits\AitsApi\Response\BasicLearner\BasicLearner;
 class AitsBasicLearner
 {
     /**
-     * @param string $uin
-     * @param string $term
-     * @return \Spatie\LaravelData\Data
-     *
      * @throws \Exception
      */
-    public static function get(string $uin, string $term): \Spatie\LaravelData\Data
+    public static function get(string $uin, string $term): Data
     {
         try {
             $response = Http::aits()

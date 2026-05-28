@@ -6,6 +6,7 @@ namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ItemNotFoundException;
+use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\StudentOverride\StudentOverride;
 
 class AitsStudentOverride
@@ -15,7 +16,7 @@ class AitsStudentOverride
      *
      * @throws \Exception
      */
-    public static function get(string $uin, string $term): \Spatie\LaravelData\Data
+    public static function get(string $uin, string $term): Data
     {
         try {
             $response = Http::aits()
@@ -42,12 +43,19 @@ class AitsStudentOverride
         string $term, string $pidm, string $crn,
         string $overrideCode, string $overrideDescription
     ): bool {
-        $body = '{"pidm": "'.$pidm.'", "termCode": "'.$term.'", "crn": "'.$crn.'", "rule": {"code": "'.$overrideCode.'", "description": "'.$overrideDescription.'"}}';
+        $body = [
+            'pidm' => $pidm,
+            'termCode' => $term,
+            'crn' => $crn,
+            'rule' => [
+                'code' => $overrideCode,
+                'description' => $overrideDescription,
+            ],
+        ];
 
         try {
             $response = Http::aits()
-                ->withBody($body)
-                ->post('/StudentRegistrationOverride/1_0/');
+                ->post('/StudentRegistrationOverride/1_0/', $body);
 
             if (! $response->successful()) {
                 return false;
@@ -66,12 +74,19 @@ class AitsStudentOverride
         string $term, string $pidm, string $crn,
         string $overrideCode, string $overrideDescription
     ): bool {
-        $body = '{"pidm": "'.$pidm.'", "termCode": "'.$term.'", "crn": "'.$crn.'", "rule": {"code": "'.$overrideCode.'", "description": "'.$overrideDescription.'"}}';
+        $body = [
+            'pidm' => $pidm,
+            'termCode' => $term,
+            'crn' => $crn,
+            'rule' => [
+                'code' => $overrideCode,
+                'description' => $overrideDescription,
+            ],
+        ];
 
         try {
             $response = Http::aits()
-                ->withBody($body)
-                ->post('/StudentRegistrationOverride/1_0/?delete=true');
+                ->post('/StudentRegistrationOverride/1_0/?delete=true', $body);
 
             if (! $response->successful()) {
                 return false;

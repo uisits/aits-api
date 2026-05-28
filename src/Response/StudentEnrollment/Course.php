@@ -23,6 +23,6 @@ class Course extends Data
         public College $validCollege,
         public Department $validDepartment,
     ) {
-        $this->course = $this->courseSubjectAbbreviation . ' ' . $this->courseNumber;
+        $this->course = $this->courseSubjectAbbreviation.' '.$this->courseNumber;
     }
 }
