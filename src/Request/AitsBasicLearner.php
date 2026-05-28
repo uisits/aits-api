@@ -24,9 +24,13 @@ class AitsBasicLearner
                 throw new AitsRequestFailed('Basic Learner request failed! '.$response, 500);
             }
 
+            if ($response->collect('list')->isEmpty()) {
+                throw new AitsRequestFailed('Basic Learner not found!', 404);
+            }
+
             return BasicLearner::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Basic Learner request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Basic Learner request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

@@ -16,6 +16,8 @@ class Name extends Data
         public string $firstName,
         public string $lastName,
     ) {
-        $this->full_name = "{$this->firstName} {$this->lastName}";
+        $this->full_name = ($this->lastName || $this->firstName)
+            ? trim($this->lastName . ', ' . $this->firstName, ', ')
+            : null;
     }
 }

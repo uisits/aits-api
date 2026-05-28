@@ -26,9 +26,13 @@ class AitsStudentAttribute
                 throw new AitsRequestFailed('Student Attribute request failed! '.$response);
             }
 
+            if ($response->collect('list')->isEmpty()) {
+                throw new AitsRequestFailed('Student Attribute not found!', 404);
+            }
+
             return StudentAttribute::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student Attribute request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Attribute request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

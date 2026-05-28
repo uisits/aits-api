@@ -6,8 +6,8 @@ namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\ItemNotFoundException;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\StudentHold\StudentHold;
 
 class AitsStudentHold
@@ -24,16 +24,16 @@ class AitsStudentHold
                 ->get('/StudentHolds/1_0/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('Student Holds request failed!');
+                throw new AitsRequestFailed('Student Holds request failed!', 500);
             }
 
             if ($response->collect('list')->isEmpty()) {
-                throw new ItemNotFoundException('Student Holds not found!');
+                throw new AitsRequestFailed('Student Holds not found!', 404);
             }
 
             return StudentHold::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student Holds request failed! '.$exception, $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Holds request failed! '.$exception, $exception->getCode(), $exception);
         }
     }
 
@@ -47,12 +47,12 @@ class AitsStudentHold
                 ->put('/StudentHolds/1_0/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('Student Hold put request failed!');
+                throw new AitsRequestFailed('Student Hold put request failed!', 500);
             }
 
             return StudentHold::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Student Hold put request failed! '.$exception, $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Hold put request failed! '.$exception, $exception->getCode(), $exception);
         }
     }
 }

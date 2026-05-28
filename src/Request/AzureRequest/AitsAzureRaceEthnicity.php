@@ -6,6 +6,7 @@ namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\RaceEthnicity\RaceEthnicity;
 
 class AitsAzureRaceEthnicity
@@ -22,16 +23,16 @@ class AitsAzureRaceEthnicity
                 ->get('/person/race-ethnicity-query/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('Race Ethnicity request failed! '.$response);
+                throw new AitsRequestFailed('Race Ethnicity request failed! '.$response, 500);
             }
 
             if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Race Ethnicity not found!');
+                throw new AitsRequestFailed('Race Ethnicity not found!', 404);
             }
 
             return RaceEthnicity::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Race Ethnicity request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Race Ethnicity request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

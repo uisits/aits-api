@@ -24,6 +24,10 @@ class AitsPersonLookup
                 throw new AitsRequestFailed('Person Lookup request failed! '.$response, 500);
             }
 
+            if ($response->collect('list')->isEmpty()) {
+                throw new AitsRequestFailed('Person not found!', 404);
+            }
+
             return Person::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             throw new AitsRequestFailed('Person Lookup request failed! '.$exception->getMessage(), $exception->getCode(), $exception);

@@ -26,6 +26,10 @@ class AitsStudentOverride
                 throw new AitsRequestFailed('Student Override request failed!', 500);
             }
 
+            if ($response->collect('list')->isEmpty()) {
+                throw new AitsRequestFailed('Student Override not found!', 404);
+            }
+
             return StudentOverride::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             throw new AitsRequestFailed('Student Override request failed!', $exception->getCode(), $exception);

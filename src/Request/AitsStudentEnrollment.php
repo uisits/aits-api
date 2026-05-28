@@ -26,6 +26,10 @@ class AitsStudentEnrollment
                 throw new AitsRequestFailed('Student Enrollment request failed! '.$response, 500);
             }
 
+            if ($response->collect('list')->isEmpty()) {
+                throw new AitsRequestFailed('Student Enrollment not found!', 404);
+            }
+
             return StudentEnrollment::from($response->collect('list')->first());
         } catch (\Exception $exception) {
             throw new AitsRequestFailed('Student Enrollment request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
