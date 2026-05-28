@@ -6,6 +6,7 @@ namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\Person\Person;
 
 class AitsPersonLookup
@@ -20,16 +21,12 @@ class AitsPersonLookup
                 ->get('/PersonLookup/1_0/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('Person Lookup request failed! '.$response);
-            }
-
-            if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Person not found!');
+                throw new AitsRequestFailed('Person Lookup request failed! '.$response, 500);
             }
 
             return Person::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Person Lookup request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Person Lookup request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

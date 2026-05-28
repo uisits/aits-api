@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\ItemNotFoundException;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\StudentOverride\StudentOverride;
 
 class AitsStudentOverride
@@ -23,16 +23,12 @@ class AitsStudentOverride
                 ->get('/StudentRegistrationOverrides/1_0/'.$uin.'/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Student Override request failed!');
-            }
-
-            if ($response->collect('list')->isEmpty()) {
-                throw new ItemNotFoundException('Student Override not found!');
+                throw new AitsRequestFailed('Student Override request failed!', 500);
             }
 
             return StudentOverride::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student Override request failed!', $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Override request failed!', $exception->getCode(), $exception);
         }
     }
 
@@ -63,7 +59,7 @@ class AitsStudentOverride
 
             return $response->json()['result'];
         } catch (\Exception $exception) {
-            throw new \Exception('Student Registration request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Override Update request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 
@@ -94,7 +90,7 @@ class AitsStudentOverride
 
             return ! $response->json()['result'];
         } catch (\Exception $exception) {
-            throw new \Exception('Student Override request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Override Delete request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

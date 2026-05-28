@@ -6,6 +6,7 @@ namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\StudentEnrollment\StudentEnrollment;
 
 class AitsStudentEnrollment
@@ -22,16 +23,12 @@ class AitsStudentEnrollment
                 ->get('/StudentEnrollment/1_0/'.$uin.'/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Student Enrollment request failed! '.$response);
-            }
-
-            if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Student Enrollment not found!');
+                throw new AitsRequestFailed('Student Enrollment request failed! '.$response, 500);
             }
 
             return StudentEnrollment::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student Enrollment request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Enrollment request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

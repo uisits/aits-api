@@ -15,7 +15,8 @@ class Person extends Data
         public string $uin,
         public ?Name $name,
         /** @var Collection<int, Netid> */
-        public ?Collection $collection,
+        public ?Collection $netIds,
+        public ?Email $email,
         public ?Address $address,
         public ?Phone $phone,
         public ?string $title,

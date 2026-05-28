@@ -7,6 +7,7 @@ namespace Uisits\AitsApi\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ItemNotFoundException;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\StudentAdvisor\StudentAdvisor;
 
 class AitsStudentAdvisor
@@ -23,16 +24,12 @@ class AitsStudentAdvisor
                 ->get('/StudentAdvisors/1_0/'.$uin.'/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Student Advisor request failed!');
-            }
-
-            if ($response->collect('list')->isEmpty()) {
-                throw new ItemNotFoundException('Student Advisor information not found!');
+                throw new AitsRequestFailed('Student Advisor request failed!', 500);
             }
 
             return StudentAdvisor::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student Advisor request failed!', $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Advisor request failed!', $exception->getCode(), $exception);
         }
     }
 }

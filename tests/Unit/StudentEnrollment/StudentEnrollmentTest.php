@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
+use Uisits\AitsApi\Request\AitsCourseDetail;
 use Uisits\AitsApi\Request\AitsCourseSummary;
 use Uisits\AitsApi\Request\AitsStudentEnrollment;
 use Uisits\AitsApi\Request\AitsStudentHold;
@@ -57,6 +58,160 @@ test('course summary returns an empty collection when list is empty', function (
     $response = AitsCourseSummary::get('420248');
 
     expect($response)->toBeEmpty();
+});
+
+test('course detail request works when proxy is enabled without proxy values', function (): void {
+    config()->set('aits-api.with_proxy', true);
+    config()->set('aits-api.proxy.host', null);
+    config()->set('aits-api.proxy.port', null);
+
+    Http::fake([
+        'https://aits.test/student/CourseDetail/1_0/420261/15181' => Http::response([
+            'list' => [
+                [
+                    'term' => '420261',
+                    'crn' => '15181',
+                    'subject' => [
+                        'code' => 'BIO',
+                        'description' => 'Biology',
+                    ],
+                    'number' => '142',
+                    'title' => 'General Biology II',
+                    'sectionDescription' => 'This course is designed for science majors.',
+                    'sectionStatus' => [
+                        'code' => 'A',
+                        'description' => 'Active',
+                    ],
+                    'scheduleType' => [
+                        'code' => 'PKG',
+                        'description' => 'Packaged Section',
+                    ],
+                    'gradableInd' => 'Y',
+                    'sectionMaxEnrollment' => 16,
+                    'sectionEnrollment' => 12,
+                    'sectionAvailableSeats' => 4,
+                    'sectionRoomNumber' => '2034',
+                    'sectionMeetingDays' => 'TR',
+                    'sectionMeetingHours' => '1400--1515',
+                    'sectionMeetingDates' => '01/12/2026--05/02/2026',
+                    'sectionBuildingDescription' => '2034 University Hall Bldg',
+                    'instructor' => [
+                        [
+                            'uin' => '653108478',
+                            'primaryInd' => 'N',
+                            'firstName' => 'Charles',
+                            'middleName' => 'Harold Caldwell',
+                            'lastName' => 'Burroughs',
+                            'sessionInstructorInd' => 'B1',
+                        ],
+                        [
+                            'uin' => '660226220',
+                            'primaryInd' => 'Y',
+                            'firstName' => 'Rick',
+                            'lastName' => 'Stokes',
+                            'sessionInstructorInd' => 'L1',
+                        ],
+                    ],
+                    'sectionNumber' => 'A',
+                    'sectionPartOfTerm' => [
+                        'code' => '1',
+                        'description' => 'Full Term',
+                    ],
+                    'sectionMeetingType' => [
+                        'code' => 'CLAS',
+                        'description' => 'Class',
+                    ],
+                    'sectionMeetingScheduleType' => [
+                        'code' => 'LCD',
+                        'description' => 'Lecture-Discussion',
+                    ],
+                    'sectionWaitCapacity' => 0,
+                    'sectionWaitCount' => 0,
+                    'sectionWaitAvail' => 0,
+                    'sectionBuilding' => [
+                        'code' => '4UHB',
+                        'description' => 'University Hall Bldg',
+                    ],
+                ],
+                [
+                    'term' => '420261',
+                    'crn' => '15181',
+                    'subject' => [
+                        'code' => 'BIO',
+                        'description' => 'Biology',
+                    ],
+                    'number' => '142',
+                    'title' => 'General Biology II',
+                    'sectionDescription' => 'This course is designed for science majors.',
+                    'sectionStatus' => [
+                        'code' => 'A',
+                        'description' => 'Active',
+                    ],
+                    'scheduleType' => [
+                        'code' => 'PKG',
+                        'description' => 'Packaged Section',
+                    ],
+                    'gradableInd' => 'Y',
+                    'sectionMaxEnrollment' => 16,
+                    'sectionEnrollment' => 12,
+                    'sectionAvailableSeats' => 4,
+                    'sectionRoomNumber' => '261',
+                    'sectionMeetingDays' => 'R',
+                    'sectionMeetingHours' => '0900--1150',
+                    'sectionMeetingDates' => '01/12/2026--05/02/2026',
+                    'sectionBuildingDescription' => '261 Health and Sciences Build',
+                    'instructor' => [
+                        [
+                            'uin' => '653108478',
+                            'primaryInd' => 'N',
+                            'firstName' => 'Charles',
+                            'middleName' => 'Harold Caldwell',
+                            'lastName' => 'Burroughs',
+                            'sessionInstructorInd' => 'B1',
+                        ],
+                        [
+                            'uin' => '660226220',
+                            'primaryInd' => 'Y',
+                            'firstName' => 'Rick',
+                            'lastName' => 'Stokes',
+                            'sessionInstructorInd' => 'L1',
+                        ],
+                    ],
+                    'sectionNumber' => 'A',
+                    'sectionPartOfTerm' => [
+                        'code' => '1',
+                        'description' => 'Full Term',
+                    ],
+                    'sectionMeetingType' => [
+                        'code' => 'CLAS',
+                        'description' => 'Class',
+                    ],
+                    'sectionMeetingScheduleType' => [
+                        'code' => 'LAB',
+                        'description' => 'Laboratory',
+                    ],
+                    'sectionWaitCapacity' => 0,
+                    'sectionWaitCount' => 0,
+                    'sectionWaitAvail' => 0,
+                    'sectionBuilding' => [
+                        'code' => '4HSB',
+                        'description' => 'Health and Sciences Build',
+                    ],
+                ],
+            ],
+        ]),
+    ]);
+
+    $response = AitsCourseDetail::get('420261', '15181');
+
+    expect($response)
+        ->toHaveCount(2)
+        ->and($response->first()->sectionMeetingScheduleType->code)->toBe('LCD')
+        ->and($response->last()->sectionMeetingScheduleType->code)->toBe('LAB')
+        ->and($response->first()->instructor)->toHaveCount(2)
+        ->and($response->first()->instructor->primaryInstructor()->uin)->toBe('660226220');
+
+    Http::assertSent(fn (Request $request): bool => $request->url() === 'https://aits.test/student/CourseDetail/1_0/420261/15181');
 });
 
 test('student hold put uses put and returns an empty collection', function (): void {

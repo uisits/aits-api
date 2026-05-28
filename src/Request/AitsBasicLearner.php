@@ -6,6 +6,7 @@ namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
 use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\BasicLearner\BasicLearner;
 
 class AitsBasicLearner
@@ -20,16 +21,12 @@ class AitsBasicLearner
                 ->get('/BasicLearner/1_0/'.$uin.'/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Detail request failed! '.$response);
-            }
-
-            if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Course Detail not found!');
+                throw new AitsRequestFailed('Basic Learner request failed! '.$response, 500);
             }
 
             return BasicLearner::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Course Detail request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new \Exception('Basic Learner request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

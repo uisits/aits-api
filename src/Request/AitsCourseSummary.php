@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 use Spatie\LaravelData\CursorPaginatedDataCollection;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\CourseSummary\CourseSummary;
 
 class AitsCourseSummary
@@ -29,12 +30,12 @@ class AitsCourseSummary
                 ->get('/CourseSummary/1_0/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Summary request failed! '.$response);
+                throw new AitsRequestFailed('Course Summary request failed! '.$response, 500);
             }
 
             return CourseSummary::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Course Summary request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Course Summary request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }
