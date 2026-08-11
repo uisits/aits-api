@@ -4,7 +4,16 @@ declare(strict_types=1);
 
 namespace Uisits\AitsApi\Request;
 
+use Illuminate\Contracts\Pagination\CursorPaginator;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Pagination\AbstractCursorPaginator;
+use Illuminate\Pagination\AbstractPaginator;
+use Illuminate\Support\Enumerable;
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\CursorPaginatedDataCollection;
+use Spatie\LaravelData\DataCollection;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\CourseSummary\CourseSummary;
 
 class AitsCourseSummary
@@ -14,23 +23,19 @@ class AitsCourseSummary
      *
      * @throws \Exception
      */
-    public static function get(string $term): \Spatie\LaravelData\DataCollection|\Spatie\LaravelData\PaginatedDataCollection|\Spatie\LaravelData\CursorPaginatedDataCollection|\Illuminate\Support\Enumerable|\Illuminate\Pagination\AbstractPaginator|\Illuminate\Contracts\Pagination\Paginator|\Illuminate\Pagination\AbstractCursorPaginator|\Illuminate\Contracts\Pagination\CursorPaginator|array
+    public static function get(string $term): DataCollection|PaginatedDataCollection|CursorPaginatedDataCollection|Enumerable|AbstractPaginator|Paginator|AbstractCursorPaginator|CursorPaginator|array
     {
         try {
             $response = Http::aits()
                 ->get('/CourseSummary/1_0/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Summary request failed! '.$response);
-            }
-
-            if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Course Summary not found!');
+                throw new AitsRequestFailed('Course Summary request failed! '.$response, 500);
             }
 
             return CourseSummary::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Course Summary request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Course Summary request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

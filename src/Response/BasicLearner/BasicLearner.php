@@ -13,7 +13,7 @@ class BasicLearner extends Data
         public string $queryUIN,
         public string $queryTermCode,
         public Person $person,
-        public StudentRecord $studentRecord,
-        public StudentClass $studentClass,
+        public ?StudentRecord $studentRecord,
+        public ?StudentClass $studentClass,
     ) {}
 }

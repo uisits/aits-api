@@ -19,6 +19,8 @@ class Person extends Data
         public ?string $lastName,
         public ?string $firstName,
     ) {
-        $this->fullName = $this->lastName . ', ' . $this->firstName;
+        $this->fullName = ($this->lastName || $this->firstName)
+            ? trim($this->lastName . ', ' . $this->firstName, ', ')
+            : null;
     }
 }

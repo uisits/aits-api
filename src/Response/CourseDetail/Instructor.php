@@ -14,5 +14,6 @@ class Instructor extends Data
         public ?string $firstName,
         public ?string $middleName,
         public string $lastName,
+        public ?string $sessionInstructorInd,
     ) {}
 }

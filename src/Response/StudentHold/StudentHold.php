@@ -13,6 +13,6 @@ class StudentHold extends Data
         public string $queryUIN,
         public Person $person,
         /** @var HoldCollection<int, Hold> */
-        public HoldCollection $hold,
+        public ?HoldCollection $hold,
     ) {}
 }

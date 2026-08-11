@@ -28,12 +28,12 @@ class Advisor extends Data
     public function __construct(
         public Person $person,
         public ?AdvisorTerm $advisorTerm,
-        public string $primaryAdvisorInd,
+        public ?string $primaryAdvisorInd,
         public ?AdvisorType $advisorType,
     ) {
         $this->firstName = $this->person?->firstName;
         $this->lastName = $this->person?->lastName;
-        $this->fullName = $this->person?->lastName . ' ' . $this->person?->firstName;
+        $this->fullName = $this->person?->lastName.' '.$this->person?->firstName;
         $this->uin = $this->person?->uin;
         $this->pidm = $this->person?->pidm;
     }

@@ -4,33 +4,31 @@ declare(strict_types=1);
 
 namespace Uisits\AitsApi\Request;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\CourseDetail\CourseDetail;
 
 class AitsCourseDetail
 {
     /**
-     * @return CourseDetail
+     * @return Collection<int, CourseDetail>
      *
      * @throws \Exception
      */
-    public static function get(string $term, string $crn): \Spatie\LaravelData\Data
+    public static function get(string $term, string $crn): Collection
     {
         try {
             $response = Http::aits()
                 ->get('/CourseDetail/1_0/'.$term.'/'.$crn);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Detail request failed! '.$response);
+                throw new AitsRequestFailed('Course Detail request failed! '.$response, 500);
             }
 
-            if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Course Detail not found!');
-            }
-
-            return CourseDetail::from($response->collect('list')->first());
+            return CourseDetail::collect($response->collect('list'));
         } catch (\Exception $exception) {
-            throw new \Exception('Course Detail request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Course Detail request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

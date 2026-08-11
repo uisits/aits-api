@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
-use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
+use Uisits\AitsApi\Response\AzureStudentHsGpa\AzureStudentHsGpa;
 
 class AitsAzureStudentHighSchoolGpa
 {
     /**
-     * @return AzureStudentGpa
+     * @return AzureStudentHsGpa
      *
      * @throws \Exception
      */
@@ -18,21 +19,19 @@ class AitsAzureStudentHighSchoolGpa
     {
         try {
             $response = Http::aitsAzure()
-                ->get('/person/high-school-query/high-school-query/'.$uin);
+                ->get('/person/high-school-query/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('Student HighSchool Gpa request failed! '.$response);
+                throw new AitsRequestFailed('Student HighSchool Gpa request failed! '.$response, 500);
             }
 
             if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Student HighSchool Gpa not found!');
+                throw new AitsRequestFailed('Student HighSchool Gpa not found!', 404);
             }
 
-            dd($response->collect('list')->first());
-
-            return AzureStudentGpa::from($response->collect('list')->first());
+            return AzureStudentHsGpa::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Student HighSchool Gpa request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student HighSchool Gpa request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

@@ -16,7 +16,7 @@ class CourseDetail extends Data
         public Subject $subject,
         public string $number,
         public string $title,
-        public string $sectionDescription,
+        public ?string $sectionDescription,
         public SectionStatus $sectionStatus,
         public ScheduleType $scheduleType,
         public string $gradableInd,

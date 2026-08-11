@@ -3,20 +3,8 @@
 This package is a collection of AITS api's. It provides and easy way to integrate and use AITS api endpoints in Laravel applications.
 
 ## Installation
-> Since this is a private package we cannot use `composer` to install the package from the repository.
-> 
-> Instead, we need to rely on GitHub repository to fetch the package directly.
 
-- Install the package by editing your `copmoser.json` file and add the repositories key to the file:
-```php
-"repositories": [
-  {
-    "type": "vcs",
-    "url": "git@github.com:uisits/aits-api.git"
-  }
-]
-```
-- Next run `composer require uisits/aits-api`
+- Run `composer require uisits/aits-api`
 
 > To get the latest version of the application please visit [https://github.com/uisits/aits-api/releases](https://github.com/uisits/aits-api/releases) and check the latest release compatible with your application version. 
 

@@ -9,7 +9,7 @@ use Spatie\LaravelData\Data;
 class AttributeDetail extends Data
 {
     public function __construct(
-        public string $code,
-        public string $description,
+        public ?string $code,
+        public ?string $description,
     ) {}
 }

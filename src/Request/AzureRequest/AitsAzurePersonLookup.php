@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
-use Uisits\AitsApi\Response\AzurePerson\AzureStudentGpa;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
+use Uisits\AitsApi\Response\AzurePerson\AzurePerson;
 
 class AitsAzurePersonLookup
 {
     /**
-     * @return AzureStudentGpa
+     * @return AzurePerson
      *
      * @throws \Exception
      */
@@ -21,16 +22,16 @@ class AitsAzurePersonLookup
                 ->get('/person/person-data-query/'.$uin);
 
             if (! $response->successful()) {
-                throw new \Exception('Person request failed! '.$response);
+                throw new AitsRequestFailed('Person request failed! '.$response, 500);
             }
 
             if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Person not found!');
+                throw new AitsRequestFailed('Person not found!', 404);
             }
 
-            return AzureStudentGpa::from($response->collect('list')->first());
+            return AzurePerson::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Person request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Person request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

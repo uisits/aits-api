@@ -11,7 +11,7 @@ class Phone extends Data
     public function __construct(
         public string $guid,
         public string $pidm,
-        public string $sequenceNum,
+        public ?string $sequenceNum,
         public ?PhoneType $type,
         public ?string $activityDate,
         public ?LinkedAddressType $linkedAddressType,

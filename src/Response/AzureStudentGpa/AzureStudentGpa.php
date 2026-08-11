@@ -13,9 +13,10 @@ class AzureStudentGpa extends Data
         public string $queryUIN,
         public string $queryTermCode,
         public string $queryLevelCode,
-        public Person $person,
+        public ?Person $person,
         public ?Gpa $termInstitutionalGpa,
         public ?Gpa $levelInstitutionalGpa,
         public ?Gpa $levelOverallGpa,
+        public ?Gpa $levelTransferGpa,
     ) {}
 }
