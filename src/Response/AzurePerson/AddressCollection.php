@@ -8,18 +8,18 @@ use Illuminate\Support\Collection;
 
 class AddressCollection extends Collection
 {
-    public function permanantAddress(): Address
+    public function permanentAddress(): ?Address
     {
-        return $this->filter(fn (Address $address) => $address->type?->code === 'PR')->first() ?? new Address();
+        return $this->filter(fn (Address $address) => $address->type?->code === 'PR')->first();
     }
 
-    public function mailingAddress(): Address
+    public function mailingAddress(): ?Address
     {
-        return $this->filter(fn (Address $address) => $address->type?->code === 'MA')->first() ?? new Address();
+        return $this->filter(fn (Address $address) => $address->type?->code === 'MA')->first();
     }
 
-    public function billingAddress(): Address
+    public function billingAddress(): ?Address
     {
-        return $this->filter(fn (Address $address) => $address->type?->code === 'BI')->first() ?? new Address();
+        return $this->filter(fn (Address $address) => $address->type?->code === 'BI')->first();
     }
 }

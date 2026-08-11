@@ -8,7 +8,7 @@ return [
      * You can replace the logic according to your needs.
      * Ex. with_proxy => true will always set proxy in all environments.
      */
-    'with_proxy' => env('APP_ENV') === 'local',
+    'with_proxy' => env('AITS_WITH_PROXY', false),
 
     /**
      * BASE URL for AITS endpoint

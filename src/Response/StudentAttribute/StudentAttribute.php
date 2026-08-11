@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Uisits\AitsApi\Response\StudentAttribute;
 
-use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Response\Person\Person;
 

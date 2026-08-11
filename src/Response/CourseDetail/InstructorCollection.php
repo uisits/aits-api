@@ -5,18 +5,21 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Response\CourseDetail;
 
 use Illuminate\Support\Collection;
-use Uisits\AitsApi\Response\CourseDetail\Instructor;
 
 class InstructorCollection extends Collection
 {
-    public function primaryInstructor(): ?Instructor
+    public function primaryInstructor(): ?InstructorCollection
     {
-        return $this->where('primaryInd', 'Y')
-            ->first();
+        return $this->filter(fn ($instructor) => $instructor->primaryInd === 'Y');
     }
 
-    public function getLectureInstructors()
+    public function getLectureInstructors(): InstructorCollection
     {
-        return $this->where('sessionInstructorInd', 'Y');
+        return $this->filter(fn ($instructor) => str_starts_with($instructor->sessionInstructorInd, 'L'));
+    }
+
+    public function getLabInstructors(): InstructorCollection
+    {
+        return $this->filter(fn ($instructor) => str_starts_with($instructor->sessionInstructorInd, 'B'));
     }
 }

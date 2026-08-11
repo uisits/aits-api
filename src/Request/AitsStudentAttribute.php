@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
+use Spatie\LaravelData\Data;
+use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\StudentAttribute\StudentAttribute;
 
 class AitsStudentAttribute
@@ -14,23 +16,23 @@ class AitsStudentAttribute
      *
      * @throws \Exception
      */
-    public static function get(string $uin, string $term): \Spatie\LaravelData\Data
+    public static function get(string $uin, string $term): Data
     {
         try {
             $response = Http::aits()
                 ->get('/StudentAttributes/1_0/'.$uin.'/400/'.$term);
 
             if (! $response->successful()) {
-                throw new \Exception('Course Detail request failed! '.$response);
+                throw new AitsRequestFailed('Student Attribute request failed! '.$response);
             }
 
             if ($response->collect('list')->isEmpty()) {
-                throw new \Exception('Course Detail not found!');
+                throw new AitsRequestFailed('Student Attribute not found!', 404);
             }
 
             return StudentAttribute::from($response->collect('list')->first());
         } catch (\Exception $exception) {
-            throw new \Exception('Course Detail request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
+            throw new AitsRequestFailed('Student Attribute request failed! '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }
