@@ -5,18 +5,20 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request\AzureRequest;
 
 use Illuminate\Support\Facades\Http;
-use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\AzureStudentGpa\AzureStudentGpa;
 
 class AitsAzureStudentGpa
 {
     /**
+     * @param string $uin
+     * @param string $termCode
+     * @param string $level
      * @return AzureStudentGpa
      *
      * @throws AitsRequestFailed
      */
-    public static function get(string $uin, string $termCode, string $level): Data
+    public static function get(string $uin, string $termCode, string $level): AzureStudentGpa
     {
         try {
             $response = Http::aitsAzure()

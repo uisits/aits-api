@@ -10,5 +10,6 @@ class Subject extends Data
 {
     public function __construct(
         public ?string $subjectCode,
+        public ?string $subjectYears,
     ) {}
 }
