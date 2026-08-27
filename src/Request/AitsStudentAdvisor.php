@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Uisits\AitsApi\Request;
 
 use Illuminate\Support\Facades\Http;
-use Spatie\LaravelData\Data;
 use Uisits\AitsApi\Exceptions\AitsRequestFailed;
 use Uisits\AitsApi\Response\StudentAdvisor\StudentAdvisor;
 
 class AitsStudentAdvisor
 {
     /**
+     * @param string $uin
+     * @param string $term
      * @return StudentAdvisor
      *
-     * @throws \Exception
+     * @throws AitsRequestFailed
      */
-    public static function get(string $uin, string $term): Data
+    public static function get(string $uin, string $term): StudentAdvisor
     {
         try {
             $response = Http::aits()
