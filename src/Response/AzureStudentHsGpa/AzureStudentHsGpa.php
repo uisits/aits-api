@@ -18,7 +18,8 @@ class AzureStudentHsGpa extends Data
         public ?string $classRank,
         public ?string $percentile,
         public ?string $graduationDate,
-        public ?string $highSchoolSubject,
+        /** @var SubjectCollection<int, Subject> */
+        public ?SubjectCollection $highSchoolSubject,
         public ?string $requestName,
         public ?string $diplomaName,
         public ?string $diplomaType,
